@@ -4,7 +4,7 @@
 set $mod Mod4
 
 # set font option
-font pango:JetBrains-Mono-NL-Regular-Nerd-Font-Complete 9 
+font pango:UbuntuMono Nerd Font 9 
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -44,13 +44,9 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id alacritty --option window.decorations=full font.size=8
 # open floating browser
 bindsym $mod+BackSpace exec firefox 
-# open textbrowser
-bindsym $mod+Shift+BackSpace exec "alacritty -e browsh --startup-url duckduckgo.de"
-# open nvim
-bindsym $mod+Shift+Return exec "alacritty -e nvim dev"
 # kill focused window
 bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
