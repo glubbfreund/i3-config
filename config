@@ -144,9 +144,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e mode "exit: [l]ogout, [r]eboot, [s]hutdown"
+bindsym $mod+Shift+e mode "⏻"
 
-mode "exit: [l]ogout, [r]eboot, [s]hutdown" {
+mode "⏻" {
     bindsym l exec i3-msg exit
     bindsym r exec reboot
     bindsym s exec shutdown -h now
@@ -154,10 +154,10 @@ mode "exit: [l]ogout, [r]eboot, [s]hutdown" {
     bindsym Return mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode ""
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
+mode "" {
 
         # These bindings trigger as soon as you enter the resize mode
         bindsym l resize shrink width 10 px or 10 ppt
