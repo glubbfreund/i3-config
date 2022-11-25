@@ -16,10 +16,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -f 'UbuntuMo
 
 # we need the german keyboard layout 
 exec --no-startup-id "setxkbmap -layout de,gr -option grp:shifts_toggle -option caps:escape"
-exec --no-startup-id "nitrogen --set-auto /usr/share/backgrounds/archlinux/geolanes.png"
+#exec --no-startup-id "nitrogen --set-auto /usr/share/backgrounds/archlinux/geolanes.png"
+exec --no-startup-id "nitrogen --restore" 
 
 # load polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id polybar -c $HOME/.config/i3/polybar.ini
 
 # Picom for gfx
 exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
@@ -173,7 +174,7 @@ mode "易" {
 # mark focussed windows and "docking point" for new ones
 new_window pixel 1
 new_float pixel 1
-for_window [floating] border pixel 0
+for_window [floating] border normal 
 
 # class         border  backgr. text    indicator child_border 
 client.focused   #72E6CC #282A2E #72E6CC #72E6CC #207575
