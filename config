@@ -56,6 +56,7 @@ bindsym $mod+y exec "rofi -show window -theme '~/.config/rofi/launchers/type-1/s
 
 # no floating area
 # smart_borders on
+for_window [urgent="latest"] focus
 for_window [class="Nitrogen"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Thunar"] floating enable
