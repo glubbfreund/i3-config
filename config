@@ -19,7 +19,7 @@ exec --no-startup-id "setxkbmap -layout de,gr -option grp:shifts_toggle -option 
 exec --no-startup-id "nitrogen --restore" 
 
 # load polybar
-exec_always --no-startup-id polybar -c $HOME/.config/i3/polybar.ini
+exec_always --no-startup-id sh ~/dev/bash/polybar
 
 # Picom for gfx
 exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
@@ -47,9 +47,8 @@ bindsym $mod+BackSpace exec firefox
 # kill focused window
 bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -show drun -theme '~/.config/rofi/launchers/type-1/style-7.rasi'"
-bindsym $mod+Shift+d exec "rofi -show filebrowser -theme '~/.config/rofi/launchers/type-1/style-7.rasi'" 
-bindsym $mod+y exec "rofi -show window -theme '~/.config/rofi/launchers/type-1/style-7.rasi'" 
+bindsym $mod+d exec --no-startup-id ~/dev/bash/dmenu
+bindsym $mod+u exec --no-startup-id ~/dev/bash/dmenu-translate
 
 # no floating area
 # smart_borders on
@@ -146,7 +145,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "sh ~/.config/rofi/powermenu/type-2/powermenu.sh"
+bindsym $mod+Shift+e exec --no-startup-id ~/dev/bash/dmenu-shutdown
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "易"
