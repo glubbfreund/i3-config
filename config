@@ -16,7 +16,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -f 'UbuntuMo
 
 # we need the german keyboard layout 
 exec --no-startup-id "setxkbmap -layout de,gr -option grp:shifts_toggle -option caps:escape"
-#exec --no-startup-id "nitrogen --set-auto /usr/share/backgrounds/archlinux/geolanes.png"
 exec --no-startup-id "nitrogen --restore" 
 
 # load polybar
@@ -29,7 +28,6 @@ exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
 exec --no-startup-id i3-autolayout autolayout
 
 # Use pamixer to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5 && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5 && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute && $refresh_i3status
