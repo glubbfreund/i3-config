@@ -14,6 +14,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -f 'UbuntuMo
 # we need the german keyboard layout 
 exec --no-startup-id "setxkbmap -layout de,gr -option grp:shifts_toggle -option caps:escape"
 exec --no-startup-id "nitrogen --restore" 
+exec --no-startup-id "firefox" 
+exec --no-startup-id "thunderbird" 
+exec --no-startup-id "spotify-launcher" 
 # load polybar
 exec_always --no-startup-id sh ~/dev/bash/polybar
 # load notify daemon
@@ -24,6 +27,9 @@ exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
 # Use pamixer to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5 && ~/dev/bash/notify-volume  
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5 && ~/dev/bash/notify-volume 
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute && ~/dev/bash/notify-volume 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% && ~/dev/bash/notify-brightness 
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5- && ~/dev/bash/notify-brightness 
