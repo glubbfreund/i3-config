@@ -23,6 +23,8 @@ exec_always --no-startup-id sh ~/dev/bash/polybar
 exec_always --no-startup-id /usr/bin/dunst 
 # Picom for gfx
 exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
+# Master/Slave layout
+exec_always --no-startup-id $HOME/src/i3-master-layout/i3-master-layout.py
 
 # Use pamixer to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5 && ~/dev/bash/notify-volume  
@@ -49,6 +51,7 @@ bindsym $mod+q kill
 bindsym $mod+d exec --no-startup-id ~/dev/bash/dmenu
 bindsym $mod+u exec --no-startup-id ~/dev/bash/dmenu-translate
 bindsym $mod+c exec --no-startup-id ~/dev/bash/dmenu-config
+bindsym $mod+y exec --no-startup-id $HOME/src/i3-master-layout/i3-swap-master.py
 bindsym $mod+x move position center   
 bindsym $mod+n resize set 1600 px 920 px
 # change focus
@@ -164,9 +167,9 @@ new_float pixel 1
 for_window [floating] border normal 
 #                        t   i   t   l   e        f  r  a  m  e  
 # class                   border  backgr.   text  indicator child_border 
-client.focused          #72E6CC #282A2EE6 #72E6CC #72E6CC #207575
-client.unfocused        #3B4147 #282A2EE6 #C5C8C6 #292d2e #292d2e
-client.focused_inactive #3B4147 #373B41E6 #C5C8C6 #292d2e #292d2e
+client.focused          #72E6CC #282A2ED9 #72E6CC #72E6CC #207575
+client.unfocused        #3B4147 #282A2ED9 #C5C8C6 #292d2e #292d2e
+client.focused_inactive #3B4147 #373B41D9 #C5C8C6 #292d2e #292d2e
 
 # i3-gaps features
 smart_borders on
