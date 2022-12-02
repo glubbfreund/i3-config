@@ -23,8 +23,6 @@ exec_always --no-startup-id sh ~/dev/bash/polybar
 exec_always --no-startup-id /usr/bin/dunst 
 # Picom for gfx
 exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
-# Master/Slave layout
-exec_always --no-startup-id $HOME/src/i3-master-layout/i3-master-layout.py
 
 # Use pamixer to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5 && ~/dev/bash/notify-volume  
@@ -35,6 +33,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute && ~/dev/bash/notify-volume 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% && ~/dev/bash/notify-brightness 
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5- && ~/dev/bash/notify-brightness 
+bindsym Print exec flameshot gui
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # Make the currently focused window a scratchpad
@@ -44,14 +43,14 @@ bindsym $mod+minus scratchpad show
 # start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty --option window.decorations=full font.size=8
 # open floating browser
-bindsym $mod+BackSpace exec firefox 
+bindsym $mod+BackSpace exec --no-startup-id firefox 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id ~/dev/bash/dmenu
 bindsym $mod+u exec --no-startup-id ~/dev/bash/dmenu-translate
 bindsym $mod+c exec --no-startup-id ~/dev/bash/dmenu-config
-bindsym $mod+y exec --no-startup-id $HOME/src/i3-master-layout/i3-swap-master.py
+bindsym $mod+o exec --no-startup-id ~/dev/bash/dmenu-websearch
 bindsym $mod+x move position center   
 bindsym $mod+n resize set 1600 px 920 px
 # change focus
@@ -67,7 +66,7 @@ bindsym $mod+Shift+k move up
 # The Layout section
 bindsym $mod+b split h
 bindsym $mod+v split v
-bindsym $mod+t split toggle
+bindsym $mod+i split toggle
 bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -88,10 +87,10 @@ bindsym $mod+Shift+e exec --no-startup-id ~/dev/bash/dmenu-shutdown
 bindsym $mod+r mode "易"
 mode "易" {
         # These bindings trigger as soon as you enter the resize mode
-        bindsym l resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym h resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j  resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -103,8 +102,7 @@ for_window [urgent="latest"] focus
 for_window [class="Nitrogen"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Thunar"] floating enable
-#for_window [class="thunderbird"] floating enable
-#for_window [class="firefox"] floating enable
+for_window [class="TeamViewer"] floating enable
 for_window [class="Xarchiver"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="libreoffice-writer"] floating enable
@@ -155,11 +153,12 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
-# bind applications to specific windo
+# bind applications to specific workspace
 for_window [class="thunderbird"] move to workspace $ws3
 for_window [class="firefox"] move to workspace $ws2
 for_window [class="Spotify"] move to workspace $ws4
 for_window [class="Skype"] move to workspace $ws5
+for_window [class="TeamViewer"] move to workspace $ws5
 
 # mark focussed windows and "docking point" for new ones
 new_window pixel 1
@@ -174,4 +173,3 @@ client.focused_inactive #3B4147 #373B41D9 #C5C8C6 #292d2e #292d2e
 # i3-gaps features
 smart_borders on
 gaps inner 10
-gaps top -5
