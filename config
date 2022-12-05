@@ -14,7 +14,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -f 'UbuntuMo
 # we need the german keyboard layout 
 exec --no-startup-id "setxkbmap -layout de,gr -option grp:shifts_toggle -option caps:escape"
 exec --no-startup-id "nitrogen --restore" 
-exec --no-startup-id "firefox" 
 exec --no-startup-id "thunderbird" 
 exec --no-startup-id "spotify-launcher" 
 # load polybar
@@ -22,7 +21,7 @@ exec_always --no-startup-id sh ~/dev/bash/polybar
 # load notify daemon
 exec_always --no-startup-id /usr/bin/dunst 
 # Picom for gfx
-exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
+exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 
 # Use pamixer to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5 && ~/dev/bash/notify-volume  
@@ -40,10 +39,13 @@ floating_modifier $mod
 bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
+bindsym $mod+m [class="thunderbird"] scratchpad show move position center
+bindsym $mod+Shift+m [class="Spotify"] scratchpad show move position center
+# WMFocus switch
+bindsym $mod+q exec --no-startup-id wmfocus --font "UbuntuMono Nerd Font":100 --textcolor "#72E6CC" --textcoloralt "#72E6CC" --textcolorcurrent "#72E6CC" --bgcolor "#282A2E" --bgcolorcurrent "#282A2E" 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id alacritty --option window.decorations=full font.size=8
+bindsym $mod+Return exec --no-startup-id alacritty 
 # open floating browser
-bindsym $mod+BackSpace exec --no-startup-id firefox 
 # kill focused window
 bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
@@ -52,7 +54,6 @@ bindsym $mod+u exec --no-startup-id ~/dev/bash/dmenu-translate
 bindsym $mod+c exec --no-startup-id ~/dev/bash/dmenu-config
 bindsym $mod+o exec --no-startup-id ~/dev/bash/dmenu-websearch
 bindsym $mod+x move position center   
-bindsym $mod+n resize set 1600 px 920 px
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+l focus right
@@ -66,11 +67,10 @@ bindsym $mod+Shift+k move up
 # The Layout section
 bindsym $mod+b split h
 bindsym $mod+v split v
-bindsym $mod+i split toggle
-bindsym $mod+f fullscreen toggle
+bindsym $mod+e layout toggle split 
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen toggle
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
@@ -84,8 +84,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id ~/dev/bash/dmenu-shutdown
 # resize window (you can also use the mouse for that)
-bindsym $mod+r mode "易"
-mode "易" {
+bindsym $mod+r mode "-- resize --"
+mode "-- resize --" {
         # These bindings trigger as soon as you enter the resize mode
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
@@ -98,10 +98,8 @@ mode "易" {
 }
 
 # no floating area
-for_window [urgent="latest"] focus
 for_window [class="Nitrogen"] floating enable
 for_window [class="Gimp"] floating enable
-for_window [class="Thunar"] floating enable
 for_window [class="TeamViewer"] floating enable
 for_window [class="Xarchiver"] floating enable
 for_window [class="feh"] floating enable
@@ -118,6 +116,11 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title="Preferences$"] floating enable
 for_window [floating] resize set 1600 px 920 px, move position center 
+
+for_window [all] title_window_icon on
+for_window [class=".*"] title_format " <i>%title</i>"
+focus_on_window_activation smart
+title_align center 
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -154,11 +157,34 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 # bind applications to specific workspace
-for_window [class="thunderbird"] move to workspace $ws3
-for_window [class="firefox"] move to workspace $ws2
-for_window [class="Spotify"] move to workspace $ws4
-for_window [class="Skype"] move to workspace $ws5
-for_window [class="TeamViewer"] move to workspace $ws5
+for_window [class="thunderbird"] move scratchpad
+for_window [class="Spotify"] move scratchpad 
+
+bindsym $mod+i mark --add "swapee"; mode "-- swap --"
+mode "-- swap --" {
+	# switch to workspace
+	bindsym $mod+1 workspace $ws1
+	bindsym $mod+2 workspace $ws2
+	bindsym $mod+3 workspace $ws3
+	bindsym $mod+4 workspace $ws4
+	bindsym $mod+5 workspace $ws5
+	bindsym $mod+6 workspace $ws6
+	bindsym $mod+7 workspace $ws7
+	bindsym $mod+8 workspace $ws8
+	bindsym $mod+9 workspace $ws9
+	bindsym $mod+0 workspace $ws10
+
+	# change focus
+	bindsym h focus left
+	bindsym j focus down
+	bindsym k focus up
+	bindsym l focus right
+
+	bindsym Return swap container with mark "swapee"; unmark "swapee"; mode "default";
+	bindsym Escape unmark "swapee"; mode "default";
+    bindsym Escape mode "default"
+    bindsym $mod+i mode "default"
+}
 
 # mark focussed windows and "docking point" for new ones
 new_window pixel 1
