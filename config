@@ -10,7 +10,8 @@ font pango:UbuntuMono Nerd Font 9
 exec --no-startup-id dex --autostart --environment i3
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -f 'UbuntuMono Nerd Font'  
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -f 'UbuntuMono Nerd Font'  
+exec --no-startup-id xautolock -time 10 -locker ~/dev/bash/blurlock
 # we need the german keyboard layout 
 exec --no-startup-id "setxkbmap -layout de,gr -option grp:shifts_toggle -option caps:escape"
 exec --no-startup-id "nitrogen --restore" 
@@ -43,8 +44,8 @@ bindsym $mod+m [class="thunderbird"] scratchpad show move position center
 bindsym $mod+Shift+m [class="Spotify"] scratchpad show move position center
 # WMFocus switch
 bindsym $mod+q exec --no-startup-id wmfocus --font "UbuntuMono Nerd Font":100 --textcolor "#72E6CC" --textcoloralt "#72E6CC" --textcolorcurrent "#72E6CC" --bgcolor "#282A2E" --bgcolorcurrent "#282A2E" 
-# start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty 
+bindsym $mod+BackSpace exec --no-startup-id google-chrome-stable 
 # open floating browser
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -184,6 +185,43 @@ mode "-- swap --" {
 	bindsym Escape unmark "swapee"; mode "default";
     bindsym Escape mode "default"
     bindsym $mod+i mode "default"
+}
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
 
 # mark focussed windows and "docking point" for new ones
