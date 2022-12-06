@@ -45,7 +45,7 @@ bindsym $mod+Shift+m [class="Spotify"] scratchpad show move position center
 # WMFocus switch
 bindsym $mod+q exec --no-startup-id wmfocus --font "UbuntuMono Nerd Font":100 --textcolor "#72E6CC" --textcoloralt "#72E6CC" --textcolorcurrent "#72E6CC" --bgcolor "#282A2E" --bgcolorcurrent "#282A2E" 
 bindsym $mod+Return exec --no-startup-id alacritty 
-bindsym $mod+BackSpace exec --no-startup-id google-chrome-stable 
+bindsym $mod+BackSpace exec --no-startup-id firefox 
 # open floating browser
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -118,6 +118,8 @@ for_window [window_role="task_dialog"] floating enable
 for_window [title="Preferences$"] floating enable
 for_window [floating] resize set 1600 px 920 px, move position center 
 
+# Hide borders
+hide_edge_borders none
 for_window [all] title_window_icon on
 for_window [class=".*"] title_format " <i>%title</i>"
 focus_on_window_activation smart
